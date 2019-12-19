@@ -16,8 +16,7 @@ Cloning this repository:
 
 ```bash
     cd <path-to-desired-directory>
-    git clone https://github.com/AdeBakre/Java_Projects.git
-    cd Java_Projects
+    git clone https://github.com/AdeBakre/hybrid-serenity-java.git
 ```
 
 ## Test Execution
