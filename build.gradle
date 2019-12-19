@@ -1,0 +1,48 @@
+buildscript{
+    repositories {
+        maven {
+            url 'https://repo1.maven.org/maven2'
+        }
+    }
+    dependencies {
+        classpath 'net.serenity-bdd:serenity-gradle-plugin:2.0.90'
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url 'https://repo1.maven.org/maven2'
+    }
+}
+
+dependencies {
+
+    def SERENITY_VERSION = "2.0.90"
+    def REST_ASSURED_VERSION = "4.0.0"
+    compile (
+            'org.codehaus.groovy:groovy-all:2.3.11'
+    )
+
+    testCompile (
+            'net.serenity-bdd:serenity-core:' + SERENITY_VERSION,
+            'net.serenity-bdd:serenity-junit:' + SERENITY_VERSION,
+            'net.serenity-bdd:serenity-rest-assured:' + SERENITY_VERSION,
+            'net.serenity-bdd:serenity-cucumber:' + SERENITY_VERSION,
+            'io.rest-assured:json-schema-validator:' + REST_ASSURED_VERSION,
+            'com.google.code.gson:gson:2.8.5',
+            'org.assertj:assertj-core:3.13.2'
+    )
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.properties.getProperties() as Map<String, ?>
+}
+
+gradle.startParameter.continueOnFailure = true

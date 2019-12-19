@@ -1,0 +1,9 @@
+*~
+.DS_STORE
+.gradle/
+.idea/
+out/
+history/
+target/
+build/
+ade.properties
