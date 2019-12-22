@@ -27,6 +27,12 @@ To execute tests:
     gradle clean test aggregate
 ```
 
+### Running tests by tags:
+
+```bash
+    gradle test -Dcucumber.options="--tags @tagname"
+```
+
 ### Overriding Test Parameters
 
 To execute test locally using Chrome, you'll need download [chromedriver](http://chromedriver.storage.googleapis.com/index.html) and set the path as outlined:
@@ -34,3 +40,4 @@ To execute test locally using Chrome, you'll need download [chromedriver](http:/
 ```bash
     gradle clean test aggregate -Dwebdriver.chrome.driver="<path-to-chrome-driver>"
 ```
+

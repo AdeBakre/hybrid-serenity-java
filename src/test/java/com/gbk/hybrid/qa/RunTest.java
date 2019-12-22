@@ -1,4 +1,4 @@
-package com.gbk.hybrid;
+package com.gbk.hybrid.qa;
 
 import cucumber.api.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;

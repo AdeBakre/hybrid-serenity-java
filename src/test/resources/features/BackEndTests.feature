@@ -1,28 +1,29 @@
 Feature: Back end scenarios are here
+  As a user
+  I want to run these tests
+  So I can rest
 
-
-  @backend
-  @taskone
-  Scenario: User converts currencies to bolivian boliviano
-    Given user makes request to get all currency maps
-    And user retrieves id for following currencies
-    |Currency|
-    |bitcoin(BTC)|
-    |usd tether(USDT)|
-    |Ethereum(ETH)   |
-    When user converts each currency to Bolivian Boliviano
+  @api
+  @price_conversion
+  Scenario Outline: Should be able to convert the price of a retrieved cryptocurrency via id to a specified currency
+    Given user makes map request to retrieve id for <cryptocurrency>
+    When user converts the amount of 1000 to currency Bolivian Boliviano
     Then the conversion should be successful
+    Examples:
+    |cryptocurrency|
+    |BTC           |
+    |USDT          |
+    |ETH           |
 
-  @backend
-  @tasktwo
+  @api
+  @cryptocurrency_info
   Scenario: Verify items on currency
-    Given user makes request to get currency info for 'ID 1027'
-    Then the user should confirm the following
-   |Logo_url|technical_doc_uri|symbol|date_added|platform|tag|
-   |logo    |https://github.com/ethereum/wiki/wiki/White-Paper|ETH|2015-08-2015-08-07T00:00:00.000Z|null|mineable|
+    Given user request the cryptocurrency ID of 1027 displayed
+    Then the logo information should contain https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png
+    And the urls.technical_doc information should contain https://github.com/ethereum/wiki/wiki/White-Paper
+    And the symbol information should contain ETH
+    And the date_added information should contain 2015-08-07T00:00:00.000Z
+    And the platform information should be empty
+    Then the tags information should contain mineable
 
-  @backend @taskthree
-  Scenario: Verify the tags for the first ten currencies on info call
-    Given user makes request for info call
-    When user checks the currencies with mineable tags
-    Then the correct currencies should be printed out
+

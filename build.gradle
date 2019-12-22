@@ -5,11 +5,11 @@ buildscript{
         }
     }
     dependencies {
-        classpath 'net.serenity-bdd:serenity-gradle-plugin:2.0.90'
+        classpath 'net.serenity-bdd:serenity-gradle-plugin:1.9.45'
     }
 }
 
-
+apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'net.serenity-bdd.aggregator'
 
@@ -23,26 +23,31 @@ repositories {
 
 dependencies {
 
-    def SERENITY_VERSION = "2.0.90"
+    def SERENITY_VERSION = "1.9.45"
     def REST_ASSURED_VERSION = "4.0.0"
     compile (
-            'org.codehaus.groovy:groovy-all:2.3.11'
+            'org.codehaus.groovy:groovy-all:2.4.11'
     )
 
     testCompile (
             'net.serenity-bdd:serenity-core:' + SERENITY_VERSION,
             'net.serenity-bdd:serenity-junit:' + SERENITY_VERSION,
             'net.serenity-bdd:serenity-rest-assured:' + SERENITY_VERSION,
-            'net.serenity-bdd:serenity-cucumber:' + SERENITY_VERSION,
             'io.rest-assured:json-schema-validator:' + REST_ASSURED_VERSION,
+            'net.serenity-bdd:serenity-cucumber:1.9.49',
             'com.google.code.gson:gson:2.8.5',
-            'org.assertj:assertj-core:3.13.2'
+            'org.assertj:assertj-core:3.13.2',
+            'ch.qos.logback:logback-classic:1.2.3',
+            'io.github.bonigarcia:webdrivermanager:3.7.1'
+
     )
 }
 
 test {
     testLogging.showStandardStreams = true
     systemProperties System.properties.getProperties() as Map<String, ?>
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+
 }
 
 gradle.startParameter.continueOnFailure = true
