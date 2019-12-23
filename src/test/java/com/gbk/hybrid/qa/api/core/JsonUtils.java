@@ -3,8 +3,6 @@ package com.gbk.hybrid.qa.api.core;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.ResponseBodyExtractionOptions;
 
-
-
 import static java.lang.String.format;
 
 public class JsonUtils {

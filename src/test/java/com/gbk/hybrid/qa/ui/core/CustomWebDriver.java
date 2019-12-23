@@ -65,6 +65,10 @@ public class CustomWebDriver implements DriverSource {
         capabilities.setCapability(BROWSER_NAME, browser);
     }
 
+    /**
+     * Method to get the drivers from the cloud instead of local install
+     * @param browser
+     */
     private void setDriverService(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":

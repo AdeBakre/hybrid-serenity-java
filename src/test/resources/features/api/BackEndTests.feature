@@ -26,4 +26,23 @@ Feature: Back end scenarios are here
     And the platform information should be empty
     Then the tags information should contain mineable
 
+  @api
+  @first_currency_info
+    Scenario Outline:
+    Given user request the cryptocurrency ID of <CurrencyId> displayed
+    Then the displayed data should show tags that contain mineable
+    And the displayed name of the currency should be <CurrencyName>
+    Examples:
+    |CurrencyId|CurrencyName|
+    |1         |Bitcoin     |
+    |2         |Litecoin    |
+    |3         |Namecoin    |
+    |4         |Terracoin   |
+    |5         |Peercoin    |
+    |6         |Novacoin    |
+    |7         |Devcoin     |
+    |8         |Feathercoin |
+    |9         |Mincoin     |
+    |10        |Freicoin    |
+
 

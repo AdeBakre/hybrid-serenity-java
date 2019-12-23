@@ -7,11 +7,16 @@ import net.thucydides.core.webdriver.exceptions.ElementNotVisibleAfterTimeoutErr
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
+
+/***
+ * Bespoke methods to act as wrappers for some existing functions
+ */
 
 public class PageObject extends net.serenitybdd.core.pages.PageObject {
 
@@ -28,6 +33,19 @@ public class PageObject extends net.serenitybdd.core.pages.PageObject {
 
     public WebElementFacade waitUntilVisible(WebElement element) {
         return waitUntilVisible(element, TIMEOUT);
+    }
+
+    public boolean isDisplayed(WebElement element, long timeout) {
+        try {
+            return waitFor(element).withTimeoutOf(ofSeconds(timeout)).waitUntilVisible().isDisplayed();
+        } catch (NotFoundException | TimeoutException | StaleElementReferenceException  | ElementNotVisibleException | ElementNotFoundAfterTimeoutError err) {
+            //LOG.info(format("%s wasn't visible after %s seconds", element, timeout));
+            return false;
+        }
+    }
+
+    public boolean isDisplayed(WebElement element) {
+        return isDisplayed(element, TIMEOUT);
     }
 
     public WebElementFacade waitUntilVisible(WebElement element, long timeout) {
@@ -70,5 +88,24 @@ public class PageObject extends net.serenitybdd.core.pages.PageObject {
             //LOG.error(message);
             throw new NoSuchElementException(message);
         }
+    }
+
+    public void openNewTabInWindows(String linkName){
+
+        //Get system OS first to determine if we use control or command. Only for PC or Mac OS
+        String osName = System.getProperty("os.name");
+        if(osName.contains("Mac OS X")){
+            String selectLinkOpenInNewTab = Keys.chord(Keys.COMMAND,Keys.RETURN);
+            getDriver().findElement(By.linkText(linkName)).sendKeys(selectLinkOpenInNewTab);
+
+        }
+        else{
+            String selectLinkOpenInNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN);
+            getDriver().findElement(By.linkText(linkName)).sendKeys(selectLinkOpenInNewTab);
+        }
+
+        //Store the number of tabs to allow us navigate to the one of our choice
+        ArrayList<String> allOpenTabs = new ArrayList<>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(allOpenTabs.get(1));
     }
 }

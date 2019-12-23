@@ -37,14 +37,13 @@ dependencies {
             'net.serenity-bdd:serenity-cucumber:1.9.49',
             'com.google.code.gson:gson:2.8.5',
             'org.assertj:assertj-core:3.13.2',
-            'ch.qos.logback:logback-classic:1.2.3',
             'io.github.bonigarcia:webdrivermanager:3.7.1'
 
     )
 }
 
 test {
-    testLogging.showStandardStreams = true
+    testLogging.showStandardStreams = false
     systemProperties System.properties.getProperties() as Map<String, ?>
     systemProperty "cucumber.options", System.getProperty("cucumber.options")
 

@@ -8,7 +8,7 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.steps.ScenarioSteps;
 
-public class BackEndTestsSteps extends ScenarioSteps{
+public class ApiTestSteps extends ScenarioSteps{
 
     @Steps
     ActionRestClient actionRestClient;
@@ -52,4 +52,16 @@ public class BackEndTestsSteps extends ScenarioSteps{
         actionRestClient.verify_that_cryptocurrency_info_is_null(attribute);
     }
 
+    @Then("^the displayed data should show (.*) that contain (.*)$")
+    public void theDisplayedDataShouldShowTagsThatContainMineable(String key, String value) {
+
+        actionRestClient.verify_that_currency_info_contains(key,value);
+    }
+
+    @And("^the displayed (.*) of the currency should be (.*)$")
+    public void theDisplayedNameOfTheCurrencyShouldBeCurrencyName(String attribute, String value) {
+
+        actionRestClient.verify_that_currency_info_contains(attribute,value);
+
+    }
 }

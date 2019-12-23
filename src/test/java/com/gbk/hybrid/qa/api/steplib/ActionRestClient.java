@@ -12,12 +12,8 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.apache.commons.lang3.RegExUtils;
 
-
-
 import static org.apache.commons.lang3.StringUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
-
-
 import java.util.*;
 
 import static java.lang.String.format;
@@ -29,8 +25,8 @@ public class ActionRestClient extends ScenarioSteps{
     private ResponseBodyExtractionOptions currentResponse;
     private String currencyCode;
     private static String cryptoMapPath = "cryptocurrency/map";
-    //private static String baseUri = "https://pro-api.coinmarketcap.com/v1/";
     Map<String, String> headers = new HashMap<>();
+    private List<String> tagsExist = new ArrayList<>();
     private Object item;
 
 
@@ -85,5 +81,7 @@ public class ActionRestClient extends ScenarioSteps{
                 isEmpty(JsonUtils.getJsonPath(currentResponse).get(format("data.%s.%s", currencyCode, key)))
         ).isTrue();
     }
+
+
 
 }
